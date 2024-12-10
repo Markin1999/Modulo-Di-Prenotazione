@@ -51,60 +51,62 @@ export default function FormPrenotazione({ setCurrentDate, setEvents }) {
   }, [utenti]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="firstName">Nome</label>
-        <input type="text" id="firstName" name="firstName" ref={firstNameRef} />
-      </div>
-      <div>
-        <label htmlFor="lastName">Cognome</label>
-        <input type="text" id="lastName" name="lastName" ref={lastNameRef} />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" ref={emailRef} />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          ref={passwordRef}
-        />
-      </div>
-      <div>
-        <label htmlFor="confirmPassword">Conferma Password</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          ref={confirmPasswordRef}
-        />
-      </div>
-      <div>
-        <label htmlFor="data">Inserisci Data</label>
-        <input
-          type="date"
-          id="data"
-          name="data"
-          ref={dataRef}
-          placeholder="yyyy/mm/dd"
-          pattern="\d{4}-\d{2}-\d{2}"
-        />
-      </div>
-      <div>
-        <label htmlFor="ora">Inserisci Ora</label>
-        <input
-          type="time"
-          name="ora"
-          placeholder="HH:mm"
-          pattern="\d{2}:\d{2}"
-          ref={oraRef}
-        />
-      </div>
+    <nav className="nav">
+      <form onSubmit={handleSubmit} className="form">
+        <div className="label">
+          <label htmlFor="firstName">Nome</label>
+          <input
+            className="border border-gray-300 rounded-md p-2 w-full"
+            type="text"
+            id="firstName"
+            name="firstName"
+            ref={firstNameRef}
+          />
+        </div>
+        <div className="label">
+          <label htmlFor="lastName">Cognome: </label>
+          <input type="text" id="lastName" name="lastName" ref={lastNameRef} />
+        </div>
+        <div className="label">
+          <label htmlFor="email">Email: </label>
+          <input type="email" id="email" name="email" ref={emailRef} />
+        </div>
+        <div className="label">
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ref={passwordRef}
+          />
+        </div>
+        <div className="label">
+          <label htmlFor="confirmPassword">Conferma Password: </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            ref={confirmPasswordRef}
+          />
+        </div>
+        <div className="label">
+          <label htmlFor="data">Inserisci Data: </label>
+          <input type="date" id="data" name="data" ref={dataRef} />
+        </div>
+        <div className="label">
+          <label htmlFor="ora">Inserisci Ora: </label>
 
-      <button type="submit">Invia</button>
-    </form>
+          <input
+            className=""
+            style={{ border: "1px solid black" }}
+            type="time"
+            name="ora"
+            ref={oraRef}
+          />
+        </div>
+
+        <button type="submit">Invia</button>
+      </form>
+    </nav>
   );
 }

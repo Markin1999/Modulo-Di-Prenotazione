@@ -36,14 +36,15 @@ const MyCalendar = () => {
   }, [events]);
 
   return (
-    <>
-      <div>
+    <div className="container">
+      <div className="formPrenotazione">
         <FormPrenotazione
           setCurrentDate={setCurrentDate}
           setEvents={setEvents}
         />
       </div>
-      <div>
+
+      <div className="calendar">
         <Calendar
           localizer={localizer}
           events={events}
@@ -59,7 +60,7 @@ const MyCalendar = () => {
           onSelectSlot={handleSlotClick}
         />
       </div>
-    </>
+    </div>
   );
 };
 
