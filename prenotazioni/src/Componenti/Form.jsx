@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function FormPrenotazione({ setCurrentDate }) {
+export default function FormPrenotazione({ setCurrentDate, setEvents }) {
   const [utenti, setUtenti] = useState([]);
 
   const firstNameRef = useRef();
@@ -9,9 +9,12 @@ export default function FormPrenotazione({ setCurrentDate }) {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const dataRef = useRef();
+  const oraRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const fullDate = `${dataRef.current.value} ${oraRef.current.value}`;
 
     const data = {
       firstName: firstNameRef.current.value,
@@ -19,16 +22,32 @@ export default function FormPrenotazione({ setCurrentDate }) {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       confirmPassword: confirmPasswordRef.current.value,
-      data: dataRef.current.value,
+      data: fullDate,
     };
+
+    const event1 = {
+      title: `${firstNameRef.current.value} ${lastNameRef.current.value}`,
+      start: new Date(fullDate),
+      end: new Date(new Date(fullDate).getTime() + 60 * 60 * 1000),
+    };
+
+    setEvents([event1]);
 
     setCurrentDate(dataRef.current.value);
 
     setUtenti((prev) => [...prev, data]);
+
+    firstNameRef.current.value = "";
+    lastNameRef.current.value = "";
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+    confirmPasswordRef.current.value = "";
+    dataRef.current.value = "";
+    oraRef.current.value = "";
   };
 
   useEffect(() => {
-    console.log(utenti);
+    console.log("utenti form" + utenti);
   }, [utenti]);
 
   return (
@@ -66,13 +85,25 @@ export default function FormPrenotazione({ setCurrentDate }) {
       <div>
         <label htmlFor="data">Inserisci Data</label>
         <input
-          type="data"
+          type="date"
           id="data"
           name="data"
           ref={dataRef}
-          placeholder="mm/dd/yyyy"
+          placeholder="yyyy/mm/dd"
+          pattern="\d{4}-\d{2}-\d{2}"
         />
       </div>
+      <div>
+        <label htmlFor="ora">Inserisci Ora</label>
+        <input
+          type="time"
+          name="ora"
+          placeholder="HH:mm"
+          pattern="\d{2}:\d{2}"
+          ref={oraRef}
+        />
+      </div>
+
       <button type="submit">Invia</button>
     </form>
   );

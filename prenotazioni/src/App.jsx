@@ -1,17 +1,17 @@
 import "./App.css";
 import FormPrenotazione from "./Componenti/Form";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/it";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-
-moment.locale("it");
 const localizer = momentLocalizer(moment);
+moment.locale("it");
 
 const MyCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState([]);
 
   const customMessages = {
     date: "Data",
@@ -29,21 +29,34 @@ const MyCalendar = () => {
     showMore: (count) => `+ Altri ${count} eventi`,
   };
 
+  const handleSlotClick = () => {};
+
+  useEffect(() => {
+    console.log(events);
+  }, [events]);
+
   return (
     <>
       <div>
-        <FormPrenotazione setCurrentDate={setCurrentDate} />
+        <FormPrenotazione
+          setCurrentDate={setCurrentDate}
+          setEvents={setEvents}
+        />
       </div>
       <div>
         <Calendar
           localizer={localizer}
-          events={[]}
+          events={events}
           startAccessor="start"
           endAccessor="end"
           date={currentDate}
+          views={["day"]}
+          defaultView="day"
           onNavigate={(date) => setCurrentDate(date)}
           messages={customMessages}
           style={{ height: 500, marginTop: "20px" }}
+          selectable={true}
+          onSelectSlot={handleSlotClick}
         />
       </div>
     </>
